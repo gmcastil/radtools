@@ -19,13 +19,10 @@ def cross_section(data):
     Args:
       data (dict): Type, fluence, events, and LET
 
-      Refactor this to accept these items as keyword arguments instead of a dict
-
     Returns:
       dict
 
     """
-    pass
 
 def stats(events):
     """Calculates 95% confidence for small numbers of events
