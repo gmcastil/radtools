@@ -9,7 +9,10 @@ Notes:
     limits.
 
 """
+from __future__ import division
 from collections import namedtuple
+from math import sqrt
+
 from sandia import STAT_DATA
 
 Limits = namedtuple("Limits", ["lower", "upper"], verbose=False)
@@ -25,8 +28,8 @@ def cross_section(data):
 
     """
 
-def stats(events):
-    """Calculates 95% confidence intervals for small numbers of events
+def _stats(events):
+    """Calculate 95% confidence intervals for small numbers of events
 
     Args:
       events (integer): Number of observables
@@ -35,4 +38,10 @@ def stats(events):
       tuple
 
     """
+    if events < 50:
+        lower, upper = STAT_DATA[events]
+    else:
+        lower = 1 - 2 / sqrt(events)
+        upper = 1 + 2 / sqrt(events)
 
+    return Limits(lower, upper)
