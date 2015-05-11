@@ -10,6 +10,7 @@ Notes:
 
 """
 from collections import namedtuple
+from sandia import STAT_DATA
 
 Limits = namedtuple("Limits", ["lower", "upper"], verbose=False)
 
@@ -25,7 +26,7 @@ def cross_section(data):
     """
 
 def stats(events):
-    """Calculates 95% confidence for small numbers of events
+    """Calculates 95% confidence intervals for small numbers of events
 
     Args:
       events (integer): Number of observables
@@ -34,4 +35,4 @@ def stats(events):
       tuple
 
     """
-    pass
+
