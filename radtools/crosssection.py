@@ -16,6 +16,7 @@ from collections import namedtuple
 from itertools import izip
 from math import sqrt
 
+import numpy as np
 from sandia import STAT_DATA
 
 Limits = namedtuple("Limits", ["lower", "upper"], verbose=False)
@@ -44,14 +45,19 @@ def cross_section(events, fluence):
     upper = []
     result = []
     for num, total_fluence in izip(events, fluence):
+        if num == 0:
+            x_sect = 1 / total_fluence
+        else:
+            x_sect = num / total_fluence
+        result.append(x_sect)
         stats = _stats(num)
-        lower.append(stats.lower)
-        upper.append(stats.upper)
-        result.append(num / total_fluence)
+        lower.append(stats.lower*x_sect)
+        upper.append(stats.upper*x_sect)
 
-    return {"cross section" : result,
-            "lower limit" : lower,
-            "upper limit" : upper}
+
+    return {"cross section" : np.asarray(result),
+            "lower limit" : np.asarray(lower),
+            "upper limit" : np.asarray(upper)}
 
 def _stats(events):
     """Calculate 95% confidence intervals for small numbers of events
