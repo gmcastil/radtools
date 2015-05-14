@@ -1,14 +1,6 @@
 # pylint: disable=C0103
-
 """
 Provides tools for generating SEE cross sections from accelerator testing
-
-Notes:
-
-  * Intended to be called with a dict containing the name of the cross section
-    (e.g., 'SEFI') to be found, fluence, events, and LET.
-  * Returns dict containing cross section, LET, lower and upper statistical
-    limits.
 
 """
 from __future__ import division
