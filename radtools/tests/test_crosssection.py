@@ -1,5 +1,5 @@
 import pandas as pd
-import pandas.util.testing as pdt
+import numpy as np
 import numpy.testing as npt
 
 import crosssection
@@ -41,7 +41,14 @@ class TestComplete(Parent):
         self.data = pd.read_table(DATA, sep="\\s*", comment="#", skiprows=8,
                                   nrows=11, names=HEADER, header=None,
                                   engine="python")
+class TestIncomplete(Parent):
+    """Tests cross section with a single upper bound"""
 
+    def setup(self):
+        self.data = pd.read_table(DATA, sep="\\s*", comment="#", skiprows=30,
+                                  nrows=7, names=HEADER, header=None,
+                                  engine="python")
+        
 class TestMultiIncomplete(Parent):
     """Tests cross section with more than one upper bounds"""
 
@@ -50,10 +57,11 @@ class TestMultiIncomplete(Parent):
                                   nrows=9, names=HEADER, header=None,
                                   engine="python")
 
-class TestIncomplete(Parent):
-    """Tests cross section with a single upper bound"""
+class TestOther():
+    """Tests behavior that is independent of calculations"""
 
-    def setup(self):
-        self.data = pd.read_table(DATA, sep="\\s*", comment="#", skiprows=30,
-                                  nrows=7, names=HEADER, header=None,
-                                  engine="python")
+    def test_wrong_length(self):
+        events = np.random.rand(10)
+        fluence = np.random.rand(9)
+        npt.assert_raises(ValueError, crosssection.cross_section,
+                          events, fluence)
