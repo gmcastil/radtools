@@ -1,14 +1,9 @@
 """
 Defines values to be used in calculating upper and lower statistical limits
 
-In order to calculate upper and lower limits for values of N < 50, compute the
-cross section in the usual way, then find the corresponding pair of values for
-N and multiply the cross section by each to yield the lower and upper limits.
-For N >= 50, the upper and lower limits can be found simply by multiplying by
-(1 +/- 2/\\sqrt(N)) respectively.
-
-Note that these are absolute values and additional processing may be necessary
-depending upon the plotting package.
+Note that these are absolute values for the upper and lower limits,
+and additional processing may be necessary depending upon the plotting
+package.
 
 .. [1] J. Schwank, "Radiation hardness assurance testing of microelectronic
        devices and integrated circuits: test guideline for proton and heavy ion
