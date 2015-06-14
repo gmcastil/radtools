@@ -5,7 +5,7 @@ import numpy.testing as npt
 import crosssection
 
 DATA = "./tests/data/cross-sections.dat"
-HEADER = ["LET", "fluence", "events",  "cross section",
+HEADER = ["LET", "fluence", "events", "cross section",
           "lower limit", "upper limit"]
 RTOL = 0.1
 
